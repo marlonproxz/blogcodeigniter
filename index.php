@@ -35,7 +35,10 @@
  * @since	Version 1.0.0
  * @filesource
  */
-
+define('APP_VERSION', "1");
+define('APP_NAME', "Blogcodeigniter");
+define('PROJECT_FOLDER', 'curso01');
+define('APP_DESCRIPTION', "Blog sobre temas de la vida...");
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
