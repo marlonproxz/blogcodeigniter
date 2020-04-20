@@ -121,6 +121,13 @@
                                         ?>
                                     </div>
                                     
+                                    <div class="form-group">
+                                        <?php
+                                        echo form_label('Publicado', 'posted');
+                                        echo form_dropdown('posted', $data_posted, null, 'class="form-control input-lg"');
+                                        ?>
+                                    </div>
+                                    
                                     <?php echo form_submit('mysubmit', 'Guardar', 'btn btn-primary' ); ?>
                                     
                                     <?php echo form_close(); ?>

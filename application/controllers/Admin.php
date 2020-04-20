@@ -7,6 +7,7 @@ Class Admin extends CI_Controller {
         
         $this->load->helper("url");
         $this->load->helper("form");
+        $this->load->helper("Post_helper");
     }
 
     public function index() {
@@ -18,7 +19,8 @@ Class Admin extends CI_Controller {
     }
     
     public function post_save(){
-        $this->load->view("admin/post/save");
+        $data["data_posted"] = posted();
+        $this->load->view("admin/post/save", $data);
     }
 
 }
