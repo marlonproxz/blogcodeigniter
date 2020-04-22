@@ -49,6 +49,22 @@
 
 <div class="form-group">
     <?php
+    echo form_label('Descripción', 'description');
+    ?>
+    <?php
+    $text_area = array(
+        'name' => 'description',
+        'id' => 'description',
+        'value' => '',
+        'class' => 'form-control input-lg'
+    );
+
+    echo form_textarea($text_area);
+    ?>
+</div>
+
+<div class="form-group">
+    <?php
     echo form_label('Imagen', 'image');
     ?>
     <?php
