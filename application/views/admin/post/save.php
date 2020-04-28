@@ -13,6 +13,7 @@
 
     echo form_input($text_input);
     ?>
+    <?php echo form_error('title','<div class="text-error">','</div>') ?>
 </div>
 
 <div class="form-group">
@@ -29,6 +30,7 @@
 
     echo form_input($text_input);
     ?>
+    <?php echo form_error('url_clean','<div class="text-error">','</div>') ?>
 </div>
 
 <div class="form-group">
@@ -45,6 +47,7 @@
 
     echo form_textarea($text_area);
     ?>
+    <?php echo form_error('content','<div class="text-error">','</div>') ?>
 </div>
 
 <div class="form-group">
@@ -61,6 +64,7 @@
 
     echo form_textarea($text_area);
     ?>
+    <?php echo form_error('description','<div class="text-error">','</div>') ?>
 </div>
 
 <div class="form-group">
