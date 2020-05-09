@@ -12,7 +12,10 @@ Class Admin extends CI_Controller {
 
         $this->load->helper("url");
         $this->load->helper("form");
+        $this->load->helper("text");
+        
         $this->load->helper("Post_helper");
+        $this->load->helper("Date_helper");
 
         $this->load->model("Post");
     }
@@ -22,7 +25,8 @@ Class Admin extends CI_Controller {
     }
 
     public function post_list() {
-        $view["body"] = $this->load->view("admin/post/list", NULL, TRUE);
+        $data["posts"] = $this->Post->findAll();
+        $view["body"] = $this->load->view("admin/post/list", $data, TRUE);
         $view["title"] = "Posts";
         $this->parser->parse("admin/template/body", $view);
     }
