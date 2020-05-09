@@ -42,12 +42,19 @@ Class Admin extends CI_Controller {
 
             if ($this->form_validation->run()) {
                 // nuestro form es valido
-
+                
+                $url_clean = $this->input->post("url_clean");
+                
+                if($url_clean == ""){
+                    $url_clean = clean_name($this->input->post("title"));
+                }
+                
                 $save = array(
                     'title' => $this->input->post("title"),
                     'content' => $this->input->post("content"),
                     'description' => $this->input->post("description"),
-                    'posted' => $this->input->post("posted")
+                    'posted' => $this->input->post("posted"),
+                    'url_clean' => $url_clean
                 );
 
                 $post_id = $this->Post->insert($save);
