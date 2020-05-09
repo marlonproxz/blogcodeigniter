@@ -62,6 +62,17 @@ Class Admin extends CI_Controller {
 
         $this->parser->parse("admin/template/body", $view);
     }
+    
+    public function post_delete($post_id = null){
+        
+        if($post_id == null){
+            echo 0;
+        }else {
+            $this->Post->delete($post_id);
+            echo 1;
+        }
+        
+    }
 
     private function upload($post_id, $title) {
 

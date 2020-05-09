@@ -64,7 +64,6 @@
         </div>
         <!-- ./wrapper -->
 
-
         <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="<?php echo base_url() ?>assets/js/admin/adminlte.min.js"></script>
