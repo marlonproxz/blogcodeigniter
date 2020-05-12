@@ -31,15 +31,36 @@ Class Admin extends CI_Controller {
         $this->parser->parse("admin/template/body", $view);
     }
 
-    public function post_save() {
-
+    public function post_save($post_id = null) {
+        
+        if($post_id == null){
+            //crear post
+            $data['title'] = $data['content'] = $data['description'] = $data['posted'] = $data['url_clean'] = "";
+            $view["title"] = "Crear Post"; 
+        }else{
+            //edicion post
+            $post = $this->Post->find($post_id);
+            $data['title'] = $post->title;
+            $data['content'] = $post->content;
+            $data['description'] = $post->description;
+            $data['posted'] = $post->posted;
+            $data['url_clean'] = $post->url_clean;
+            $view["title"] = "Actualizar Post";
+        }
+        
         if ($this->input->server("REQUEST_METHOD") == "POST") {
 
             $this->form_validation->set_rules('title', 'Titulo', 'required|min_length[10]|max_length[65]');
             $this->form_validation->set_rules('content', 'Contenido', 'required|min_length[10]');
             $this->form_validation->set_rules('description', 'Descripción', 'max_length[100]');
             $this->form_validation->set_rules('posted', 'Publicado', 'required');
-
+            
+            $data['title'] = $this->input->post("title");
+            $data['content'] = $this->input->post("content");
+            $data['description'] = $this->input->post("description");
+            $data['posted'] = $this->input->post("posted");
+            $data['url_clean'] = $this->input->post("url_clean");
+            
             if ($this->form_validation->run()) {
                 // nuestro form es valido
                 
@@ -56,8 +77,11 @@ Class Admin extends CI_Controller {
                     'posted' => $this->input->post("posted"),
                     'url_clean' => $url_clean
                 );
-
-                $post_id = $this->Post->insert($save);
+                
+                if($post_id == null)
+                    $post_id = $this->Post->insert($save);
+                else
+                    $post_id = $this->Post->update($post_id, $save);
 
                 $this->upload($post_id, $this->input->post("title"));
             }
@@ -65,7 +89,6 @@ Class Admin extends CI_Controller {
 
         $data["data_posted"] = posted();
         $view["body"] = $this->load->view("admin/post/save", $data, TRUE);
-        $view["title"] = "Crear Post";
 
         $this->parser->parse("admin/template/body", $view);
     }

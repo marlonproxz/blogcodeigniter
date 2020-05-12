@@ -7,7 +7,7 @@
     $text_input = array(
         'name' => 'title',
         'id' => 'title',
-        'value' => '',
+        'value' => $title,
         'class' => 'form-control input-lg'
     );
 
@@ -24,7 +24,7 @@
     $text_input = array(
         'name' => 'url_clean',
         'id' => 'url_clean',
-        'value' => '',
+        'value' => $url_clean,
         'class' => 'form-control input-lg'
     );
 
@@ -41,7 +41,7 @@
     $text_area = array(
         'name' => 'content',
         'id' => 'content',
-        'value' => '',
+        'value' => $content,
         'class' => 'form-control input-lg'
     );
 
@@ -58,7 +58,7 @@
     $text_area = array(
         'name' => 'description',
         'id' => 'description',
-        'value' => '',
+        'value' => $description,
         'class' => 'form-control input-lg'
     );
 
@@ -87,7 +87,7 @@
 <div class="form-group">
     <?php
     echo form_label('Publicado', 'posted');
-    echo form_dropdown('posted', $data_posted, null, 'class="form-control input-lg"');
+    echo form_dropdown('posted', $data_posted, $posted, 'class="form-control input-lg"');
     ?>
 </div>
 
