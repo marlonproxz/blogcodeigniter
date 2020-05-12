@@ -96,3 +96,13 @@
 <?php echo form_submit('mysubmit', 'Guardar', 'btn btn-primary'); ?>
 
 <?php echo form_close(); ?>
+
+<script>
+    $(function () {
+        var editor = CKEDITOR.replace('content', {
+           height: 400,
+           filebrowserUploadUrl: '<?php echo base_url() ?>admin/upload',
+           filebrowserBrowseUrl: '<?php echo base_url() ?>admin/images_server'
+        });
+    });
+</script>

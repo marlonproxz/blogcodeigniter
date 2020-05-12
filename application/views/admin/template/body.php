@@ -67,6 +67,9 @@
         <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="<?php echo base_url() ?>assets/js/admin/adminlte.min.js"></script>
+        
+        <script src="<?php echo base_url() ?>assets/ckeditor/ckeditor.js"></script>
+        
         <script src="<?php echo base_url() ?>assets/js/admin/demo.js"></script>
         <script src="<?php echo base_url() ?>assets/js/admin/main.js"></script>
     </body>
