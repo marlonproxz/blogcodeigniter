@@ -35,7 +35,7 @@ Class Admin extends CI_Controller {
         
         if($post_id == null){
             //crear post
-            $data['title'] = $data['content'] = $data['description'] = $data['posted'] = $data['url_clean'] = "";
+            $data['title'] = $data['image'] = $data['content'] = $data['description'] = $data['posted'] = $data['url_clean'] = "";
             $view["title"] = "Crear Post"; 
         }else{
             //edicion post
@@ -45,6 +45,7 @@ Class Admin extends CI_Controller {
             $data['description'] = $post->description;
             $data['posted'] = $post->posted;
             $data['url_clean'] = $post->url_clean;
+            $data['image'] = $post->image;
             $view["title"] = "Actualizar Post";
         }
         

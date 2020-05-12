@@ -82,6 +82,8 @@
 
     echo form_input($text_input);
     ?>
+    
+    <?php echo $image != "" ? '<img class="img_post img-thumbnail img-presentation-small" src="'. base_url().'uploads/post/'. $image . '">' : "" ?>
 </div>
 
 <div class="form-group">

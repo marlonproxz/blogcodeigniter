@@ -15,7 +15,7 @@
             <td><?php echo word_limiter($p->title, 4) ?></td>
             <td><?php echo word_limiter($p->description, 4) ?></td>
             <td><?php echo format_date($p->created_at) ?></td>
-            <td><?php echo $p->image != "" ? '<img class="img-thumbnail img-presentation-small" src="'. base_url().'uploads/post/'. $p->image . '">' : "" ?></td>
+            <td><?php echo $p->image != "" ? '<img class="img_post img-thumbnail img-presentation-small" src="'. base_url().'uploads/post/'. $p->image . '">' : "" ?></td>
             <td><?php echo $p->posted; ?></td>
             <td>
                 <a class="btn btn-sm btn-primary" 
