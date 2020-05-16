@@ -73,8 +73,8 @@
     ?>
     <?php
     $text_input = array(
-        'name' => 'image',
-        'id' => 'image',
+        'name' => 'upload',
+        'id' => 'upload',
         'value' => '',
         'type' => 'file',
         'class' => 'form-control input-lg'

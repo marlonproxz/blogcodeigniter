@@ -53,7 +53,7 @@ Class Admin extends CI_Controller {
 
             $this->form_validation->set_rules('title', 'Titulo', 'required|min_length[10]|max_length[65]');
             $this->form_validation->set_rules('content', 'Contenido', 'required|min_length[10]');
-            $this->form_validation->set_rules('description', 'Descripción', 'max_length[100]');
+            $this->form_validation->set_rules('description', 'DescripciÃ³n', 'max_length[100]');
             $this->form_validation->set_rules('posted', 'Publicado', 'required');
             
             $data['title'] = $this->input->post("title");
@@ -82,7 +82,7 @@ Class Admin extends CI_Controller {
                 if($post_id == null)
                     $post_id = $this->Post->insert($save);
                 else
-                    $post_id = $this->Post->update($post_id, $save);
+                    $this->Post->update($post_id, $save);
 
                 $this->upload($post_id, $this->input->post("title"));
             }
@@ -105,17 +105,19 @@ Class Admin extends CI_Controller {
         
     }
 
-    private function upload($post_id, $title) {
+    public function upload($post_id = null, $title = null) {
 
-        $image = "image";
+        $image = "upload";
         
-        $title = clean_name($title);
+        if($title != null)
+            $title = clean_name($title);
         
         // configuraciones de carga
         $config['upload_path'] = 'uploads/post/';
-        $config['file_name'] = $title;
+        if($title != null)
+            $config['file_name'] = $title;
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '5000';
+        $config['max_size'] = 5000;
         $config['overwrite'] = TRUE;
 
         //Cargamos la libreria
@@ -123,15 +125,19 @@ Class Admin extends CI_Controller {
 
         if ($this->upload->do_upload($image)) {
             // se cargo la imagen
-            
             // datos del upload
             $data = $this->upload->data();
             
-            $save = array(
-                'image' => $title. $data['file_ext']
-            );
+            if($title != null && $post_id != null){
+                $save = array(
+                    'image' => $title. $data['file_ext']
+                );
+                $this->Post->update($post_id, $save);
+            } else{
+                $title = $data["file_name"];
+                echo json_encode(array("fileName" => $title, "uploaded" => 1, "url" => "/" . PROJECT_FOLDER . "/uploads/post/" . $title ));
+            }
             
-            $this->Post->update($post_id, $save);
             $this->resize_image($data['full_path']);
         }
     }
