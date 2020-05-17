@@ -104,7 +104,13 @@ Class Admin extends CI_Controller {
         }
         
     }
-
+    
+    public function images_server(){
+        $data["images"] = all_images();
+        //var_dump($data);
+        $this->load->view("admin/post/image", $data);
+    }
+    
     public function upload($post_id = null, $title = null) {
 
         $image = "upload";
