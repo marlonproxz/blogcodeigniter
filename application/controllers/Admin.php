@@ -40,7 +40,7 @@ Class Admin extends CI_Controller {
         
         if($post_id == null){
             //crear post
-            $data['title'] = $data['image'] = $data['content'] = $data['description'] = $data['posted'] = $data['url_clean'] = "";
+            $data['category_id'] = $data['title'] = $data['image'] = $data['content'] = $data['description'] = $data['posted'] = $data['url_clean'] = "";
             $view["title"] = "Crear Post"; 
         }else{
             //edicion post
@@ -51,8 +51,11 @@ Class Admin extends CI_Controller {
             $data['posted'] = $post->posted;
             $data['url_clean'] = $post->url_clean;
             $data['image'] = $post->image;
+            $data['category_id'] = $post->category_id;
             $view["title"] = "Actualizar Post";
         }
+        // para el listado de categorias
+        $data['categories'] = categories_to_form($this->Category->findAll());
         
         if ($this->input->server("REQUEST_METHOD") == "POST") {
 
@@ -81,6 +84,7 @@ Class Admin extends CI_Controller {
                     'content' => $this->input->post("content"),
                     'description' => $this->input->post("description"),
                     'posted' => $this->input->post("posted"),
+                    'category_id' => $this->input->post("category_id"),
                     'url_clean' => $url_clean
                 );
                 
