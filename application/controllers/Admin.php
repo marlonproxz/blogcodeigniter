@@ -18,12 +18,17 @@ Class Admin extends CI_Controller {
         $this->load->helper("Date_helper");
 
         $this->load->model("Post");
+        $this->load->model("Category");
     }
 
     public function index() {
         $this->load->view('admin/test');
     }
-
+    
+    /*     * ***
+     * CRUD PARA LOS POST
+     */
+    
     public function post_list() {
         $data["posts"] = $this->Post->findAll();
         $view["body"] = $this->load->view("admin/post/list", $data, TRUE);
@@ -100,6 +105,76 @@ Class Admin extends CI_Controller {
             echo 0;
         }else {
             $this->Post->delete($post_id);
+            echo 1;
+        }
+        
+    }
+    
+    /*     * ***
+     * CRUD PARA LOS CATEGORY
+     */
+
+    public function category_list() {
+        $data["categories"] = $this->Category->findAll();
+        $view["body"] = $this->load->view("admin/category/list", $data, TRUE);
+        $view["title"] = "Categories";
+        $this->parser->parse("admin/template/body", $view);
+    }
+
+    public function category_save($category_id = null) {
+        
+        if($category_id == null){
+            //crear category
+            $data['name'] = $data['url_clean'] = "";
+            $view["title"] = "Crear Categoria"; 
+        }else{
+            //edicion category
+            $category = $this->Category->find($category_id);
+            $data['name'] = $category->name;
+            $data['url_clean'] = $category->url_clean;
+            $view["title"] = "Actualizar Categoria";
+        }
+        
+        if ($this->input->server("REQUEST_METHOD") == "POST") {
+
+            $this->form_validation->set_rules('name', 'Nombre', 'required|min_length[10]|max_length[100]');
+            
+            $data['name'] = $this->input->post("name");
+            $data['url_clean'] = $this->input->post("url_clean");
+            
+            if ($this->form_validation->run()) {
+                // nuestro form es valido
+                
+                $url_clean = $this->input->post("url_clean");
+                
+                if($url_clean == ""){
+                    $url_clean = clean_name($this->input->post("name"));
+                }
+                
+                $save = array(
+                    'name' => $this->input->post("name"),
+                    'url_clean' => $url_clean
+                );
+                
+                if($category_id == null)
+                    $category_id = $this->Category->insert($save);
+                else
+                    $this->Category->update($category_id, $save);
+
+            }
+        }
+        
+        $view["body"] = $this->load->view("admin/category/save", $data, TRUE);
+
+        $this->parser->parse("admin/template/body", $view);
+    }
+    
+    public function category_delete($category_id = null){
+        
+        if($category_id == null){
+            echo 0;
+        }else {
+            $this->Category->delete($category_id);
             echo 1;
         }
         

@@ -43,8 +43,8 @@
                     <span>Categorías</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Crear</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="<?php echo base_url() ?>admin/category_save"><i class="fa fa-circle-o"></i> Crear</a></li>
+                    <li><a href="<?php echo base_url() ?>admin/category_list"><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
         </ul>
